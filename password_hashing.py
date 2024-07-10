@@ -28,10 +28,8 @@ def hash_passwords():
         salt = generate_salt()
         salted_password = password + salt  # Concatenate password and salt
         hashed_password = ph.hash(salted_password)
-        hashed_passwords[username] = {
-            'hash': hashed_password,
-            'salt': salt
-        }
+        combined = hashed_password + salt  # Combine hashed password and salt
+        hashed_passwords[username] = combined
 
     with open('hashed_passwords.json', 'w') as file:
         json.dump(hashed_passwords, file, indent=4)
